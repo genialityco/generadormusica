@@ -6,7 +6,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState("Colombia 4.0 a generar innovación, con inteligencia artificial e inteligencia colombiana");
   const [message, setMessage] = useState("mensaje prueba asdf asdf asd f");
   const [genre, setGenre] = useState("rock");
-  const [clip_id, setClip_id] = useState("d097ce99-9d9b-475f-b221-2e99b66b2521");
+  const [clip_id, setClip_id] = useState(null);
   const [result, setResult] = useState({});
 
 
@@ -29,8 +29,14 @@ export default function Home() {
     console.log("datax",datos,datos.data.clip_ids[0]);
     setClip_id(datos.data.clip_ids[0])
     setMessage(JSON.stringify(datos));
-    fetchData();
   };
+
+  useEffect(() => {
+    // Check if someValue is not null before calling the function
+    if (clip_id !== null && clip_id !== undefined) {
+      fetchData();
+    }
+  }, [clip_id]); // Dependency array, effect runs when someValue changes
 
   const handleChange = (event) => {
     setGenre(event.target.value); // Update state with the selected value
@@ -49,8 +55,7 @@ export default function Home() {
           setData(result);
           
           // Check if the condition is met (adjust the condition as necessary)
-          if (!result && result.status != "complete") {
-           
+          if (!result || result.status != "complete") {
               // If not complete, wait and fetch again
               setTimeout(fetchData, 2000); // Fetch again after 2 seconds
           } else {
@@ -76,7 +81,8 @@ export default function Home() {
 
         <label>Select Music Genre:</label>
         <select value={genre} id="genre" name="genre" onChange={handleChange}>
-          <option value="rock">Rock</option>
+        <option value="salsa">Salsa</option>
+        <option value="rock">Rock</option>
           <option value="pop">Pop</option>
           <option value="hiphop">Hip-Hop</option>
           <option value="jazz">Jazz</option>
@@ -96,7 +102,7 @@ export default function Home() {
         </select>
 
 
-        {(loading) && <p>Generando...</p>}
+        {(loading) && <p>Generando .....</p>}
         {(error) && <p>Error: {error}</p>}
 
         {data && <div>
@@ -107,6 +113,7 @@ export default function Home() {
         </div>}
 
 
+         {clip_id && <p>CLIP ID: {clip_id}</p>}
         <label>Mensaje del servidor (para debug)</label>
         <textarea rows={4} cols={40}  value={message} readOnly />
           

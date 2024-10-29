@@ -2,9 +2,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url); // Get the URL of the request
   const clip_id = searchParams.get("clip_id"); // Access the genre parameter
   const prompt =
-    searchParams.get("prompt") ??
-    "Colombia 4.0 a generar innovación, con inteligencia artificial e inteligencia colombiana"; // Access the prompt parameter
-
+    searchParams.get("prompt");
   
   const response = await fetch("https://api.aimlapi.com/v2/generate/audio/suno-ai/clip?status=streaming&clip_id="+clip_id, {
     method: "GET",
