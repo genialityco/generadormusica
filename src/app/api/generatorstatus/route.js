@@ -7,7 +7,7 @@ export async function GET(request) {
   const response = await fetch("https://api.aimlapi.com/v2/generate/audio/suno-ai/clip?status=streaming&clip_id="+clip_id, {
     method: "GET",
     headers: {
-      Authorization: "Bearer 2b854ca0bcdc4b0eba0aa3f8b70f2a99",
+      Authorization: "Bearer 1b65080456fd4f4bb1ee74e9954b8cf3",
       "Content-Type": "application/json",
     }
   });

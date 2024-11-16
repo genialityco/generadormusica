@@ -15,7 +15,31 @@
 }
 
 body {
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Ajuste para colores de elementos interactivos */
+button {
+  color: var(--foreground);
+  background-color: var(--background);
+  border: 1px solid var(--foreground);
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+/* Ajustes adicionales para otros componentes si es necesario */
+textarea, select {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--foreground);
+  transition: background-color 0.3s, color 0.3s;
 }
